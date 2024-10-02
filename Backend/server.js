@@ -44,6 +44,14 @@
 
 require('dotenv').config({ path: `${process.cwd()}/.env` });
 const express = require('express');
+const { authorize } = require('../middlewares/authorize');
+const userRoutes = require('./routes/userRoutes');
+const orderRoutes = require('./routes/orderRoutes');
+const pizzaRoutes = require('./routes/pizzaRoutes');
+const restaurantRoutes = require('./routes/restaurantRoutes');
+const toppingRoutes = require('./routes/toppingRoutes');
+
+
 
 const app = express();
 
@@ -57,6 +65,15 @@ app.use(
         })
     })
 ;
+
+app.use('/users', userRoutes);
+app.use('/orders', orderRoutes);
+app.use('/pizzas', pizzaRoutes);
+app.use('/restaurants', restaurantRoutes);
+app.use('/toppings', toppingRoutes);
+
+
+
 const PORT = process.env.APP_PORT || 4000;
 
 app.listen(PORT, () => {
